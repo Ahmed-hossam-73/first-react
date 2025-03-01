@@ -1,79 +1,49 @@
 import { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./Portfolio.css";
 
 export default function Portfolio() {
   const [modalImg, setModalImg] = useState("");
-  var modal = document.getElementById('modal')
-  function openModel(e){
-    var modelImg = e.currentTarget.querySelector("img").src;
-    setModalImg(modelImg)
-    modal.classList.remove("d-none");
+
+  function openModal(e) {
+    setModalImg(e.currentTarget.querySelector("img").src);
+    document.getElementById("modal").classList.remove("d-none");
   }
+
   function closeModal() {
-    modal.classList.add("d-none");
+    document.getElementById("modal").classList.add("d-none");
   }
-  document.addEventListener("keydown", function (e) {
-    if (e.key == "Escape") {
-      closeModal();
-    }
-  });
-  
-  document.addEventListener("click", function (e) {
-    if (e.target.classList.contains("box-info")) {
-      closeModal();
-    }
-  });
+
   return (
-    <div className="flex flex-col items-center min-h-screen justify-center text-gray-800">
-      <h2 className="text-3xl font-bold mt-4">portfolio component</h2>
-      <div className="nextLinePortfolio h-10 relative w-10 text-center">
-    <i className="fa-solid fa-star text-gray-800"></i>
-    </div>
-    <div className="grid grid-cols-3 gap-6 w-8/12">
-      <div className="w-full h-full rounded-2xl border border-white overflow-hidden layer-main relative " onClick={openModel}>
-        <img src="https://routeegy.github.io/startFramework/assets/images/poert1.png" alt="" />
-        <div className="layer bg-teal-500 absolute flex justify-center items-center">
-        <i className="fa-solid fa-plus text-white text-6xl"></i>
-        </div>
+    <div className="d-flex flex-column align-items-center min-vh-100 text-dark p-15">
+      <h2 className="display-4 fw-bold mt-4">Portfolio Component</h2>
+      <div className="position-relative mt-2 nextLinePortfolio">
+        <i className="fa-solid fa-star" style={{ fontSize: '1.5rem' }}></i>
       </div>
-      <div className="w-full h-full rounded-2xl border border-white overflow-hidden layer-main relative " onClick={openModel}>
-        <img src="https://routeegy.github.io/startFramework/assets/images/port2.png" alt="" />
-        <div className="layer bg-teal-500 absolute flex justify-center items-center">
-        <i className="fa-solid fa-plus text-white text-6xl"></i>
-        </div>
+
+      <div className="container text-center">
+        <div className="row g-4">
+        {[1, 2, 3, 1, 2, 3].map((num, index) => (
+  <div className="col-md-4" key={index}>
+    <div className="portfolio-item rounded border overflow-hidden position-relative" onClick={openModal}>
+      <img 
+        src={`https://routeegy.github.io/startFramework/assets/images/${(index === 0 || index === 3) ? "poert1.png" : `port${num}.png`}`}
+        alt="Portfolio Item"
+        className="img-fluid"
+      />
+      <div className="overlay">
+        <i className="fa-solid fa-plus text-white display-3"></i>
       </div>
-      <div className="w-full h-full rounded-2xl border border-white overflow-hidden layer-main relative " onClick={openModel}>
-        <img src="https://routeegy.github.io/startFramework/assets/images/port3.png" alt="" />
-        <div className="layer bg-teal-500 absolute flex justify-center items-center">
-        <i className="fa-solid fa-plus text-white text-6xl"></i>
-        </div>
-      </div>
-      <div className="w-full h-full rounded-2xl border border-white overflow-hidden layer-main relative " onClick={openModel}>
-        <img src="https://routeegy.github.io/startFramework/assets/images/poert1.png" alt="" />
-        <div className="layer bg-teal-500 absolute flex justify-center items-center">
-        <i className="fa-solid fa-plus text-white text-6xl"></i>
-        </div>
-      </div>
-      <div className="w-full h-full rounded-2xl border border-white overflow-hidden layer-main relative " onClick={openModel}>
-        <img src="https://routeegy.github.io/startFramework/assets/images/port2.png" alt="" />
-        <div className="layer bg-teal-500 absolute flex justify-center items-center">
-        <i className="fa-solid fa-plus text-white text-6xl"></i>
-        </div>
-      </div>
-      <div className="w-full h-full rounded-2xl border border-white overflow-hidden layer-main relative " onClick={openModel}>
-        <img src="https://routeegy.github.io/startFramework/assets/images/port3.png" alt="" />
-        <div className="layer bg-teal-500 absolute flex justify-center items-center">
-        <i className="fa-solid fa-plus text-white text-6xl"></i>
-        </div>
-      </div>
-    </div>
-   <div className="box-info position-absolute start-0 top-0 w-100 h-100 d-flex justify-content-center align-items-center d-none" id="modal" style={{backgroundColor: '#0007'}}>
-  <div className="modal-dialog">
-    <div className="bg-white p-4 rounded-2 shadow-lg" style={{width: 500, zIndex: 10}}>
-    <img src={modalImg} alt="" />
     </div>
   </div>
-</div>
-
+))}
+        </div>
+      </div>
+      <div id="modal" className="modal-overlay d-none" onClick={closeModal}>
+        <div className="modal-content">
+          <img src={modalImg} alt="Enlarged View" className="img-fluid" />
+        </div>
+      </div>
     </div>
-  )
+  );
 }

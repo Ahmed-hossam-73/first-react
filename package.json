@@ -2,7 +2,7 @@
   "name": "react-1",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://Ahmed-hossam-73.github.io/first-react",
+  "homepage": "https://Ahmed-hossam-73.github.io/Routing",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -20,7 +20,9 @@
     "bootstrap": "^5.3.3",
     "font-awesome": "^4.7.0",
     "react": "^19.0.0",
+    "react-bootstrap": "^2.10.9",
     "react-dom": "^19.0.0",
+    "react-icons": "^5.5.0",
     "react-router-dom": "^7.2.0",
     "tailwindcss": "^4.0.8"
   },
